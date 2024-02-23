@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+  workflow_dispatch:
+
+env:
+  BUILD_DIR: _build
+  INSTALL_DIR: _install
+  EXPORT_BUILD_DIR: _build_export
+
+jobs:
+
+  build_ubuntu_ifx:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check-out code
+        uses: actions/checkout@v3
+
+      - name: Setup Intel oneAPI
+        uses: rscohn2/setup-oneapi@v1
+        with:
+          components: ifx
+
+      - name: Set compiler environment
+        run: echo "FC=ifx" >> ${GITHUB_ENV}
+
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v1.14
+
+      - name: Setup Ninja
+        uses: ashutoshvarma/setup-ninja@v1.1
+
+      - name: Build Fortuno
+        run: |
+          source /opt/intel/oneapi/setvars.sh
+          cmake -B ${BUILD_DIR} -G Ninja -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}
+          cmake --build ${BUILD_DIR}
+          cmake --install ${BUILD_DIR}
+
+      - name: Test export
+        run: |
+          source /opt/intel/oneapi/setvars.sh
+          CMAKE_PREFIX_PATH=${INSTALL_DIR} cmake -B ${EXPORT_BUILD_DIR} -G Ninja test/export
+          cmake --build ${EXPORT_BUILD_DIR}
+          ${EXPORT_BUILD_DIR}/testapp
