@@ -1,7 +1,3 @@
-# CMake config files were created by modifying the template at
-# https://github.com/LecrisUT/CMake-Template/
-
-
 #[=================================================================================================[
 #                                 Basic project definition                                        #
 ]=================================================================================================]

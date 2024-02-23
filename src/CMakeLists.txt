@@ -15,7 +15,7 @@ set_target_properties(
 target_include_directories(
   Fortuno PUBLIC
   $<BUILD_INTERFACE:${moduledir}>
-  $<INSTALL_INTERFACE:${FORTUNO_INSTALL_INCLUDEDIR}>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_LIBDIR}/${FORTUNO_INSTALL_MODULEDIR}>
 )
 
 # ifx (as of version 2024.0.2) crashes when optimization is turned on
