@@ -8,9 +8,9 @@ Documented examples demonstrating the usage of the Fortuno unit testing framewor
 
 - `serial <serial>`_: Unit tests in pure Fortran.
 
-- ˋserial <serial-fpp>ˋ_: Unit tests utilizing fpp-style macros (which are natively understood by basically all Fortran compilers). Allows for automatically added file and line information when reporting failure.
+- `serial-fpp <serial-fpp>`_: Unit tests utilizing fpp-style macros (which are natively understood by basically all Fortran compilers). Allows for automatically added file and line information when reporting failure.
 
-- ˋserial <serial-fypp>ˋ_: Unit tests utilizing Fypp macros (helpful if your project uses the Fypp-preprocessor). Allows for automatic test registration as well as for automatic file and line information when reporting failure.
+- `serial-fypp <serial-fypp>`_: Unit tests utilizing Fypp macros (helpful if your project uses the Fypp-preprocessor). Allows for automatic test registration as well as for automatic file and line information when reporting failure.
 
 
 **MPI-parallel unit tests**
