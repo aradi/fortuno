@@ -5,6 +5,7 @@ Fortuno examples
 Documented examples demonstrating the usage of the Fortuno unit testing framework for various test scenarios.
 
 **Serial unit tests**
+
 - `serial <serial>`_: Unit tests in pure Fortran.
 
 - ˋserial <serial-fpp>ˋ_: Unit tests utilizing fpp-style macros (which are natively understood by basically all Fortran compilers). Allows for automatically added file and line information when reporting failure.
