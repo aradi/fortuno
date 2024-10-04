@@ -20,7 +20,9 @@ contains
     type(test_list) :: tests
 
     tests = test_list([&
+        ! Add one test without enclosing test suite (just for demonstration)
         test("factorial_0", test_factorial_0),&
+        ! Add a test suite with further tests
         suite("simple", test_list([&
             test("factorial_1", test_factorial_1),&
             test("factorial_2", test_factorial_2)&
@@ -39,13 +41,13 @@ contains
     call check(factorial(1) == 1)
   end subroutine test_factorial_1
 
-  ! Test: 2! = 2 (will fail due to the bug in the implementation of the factorial function)
+  ! Test: 2! = 2 (will fail due to the bug in the factorial() function in mylib)
   subroutine test_factorial_2()
-    ! Two failing checks, you should see info about both in the output
+    ! Both check will fail, you should see info about both in the output
     call check(is_equal(factorial(2), 2),&
         & msg="Test failed for demonstration purposes",&
         & file="test_simple.f90",&
-        & line=43)
+        & line=47)
     call check(factorial(2) == 2)
   end subroutine test_factorial_2
 
