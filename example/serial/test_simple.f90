@@ -6,7 +6,7 @@
 module test_simple
   use mylib, only : cotan, factorial, r32
   use fortuno_serial, only : all_close, is_equal, test => serial_case_item, check => serial_check,&
-      & suite => serial_suite_item, test_list
+      & suite => serial_suite_item, test_list, test_item
   implicit none
 
   private
@@ -23,15 +23,34 @@ contains
         ! Best practice is to create at least one suite with the name of the module and put the
         ! tests in it, like below. You might further structure your test sets by nesting further
         ! suites into the top level one.
-        suite("simple", test_list([&
-            test("factorial_0", test_factorial_0),&
-            test("factorial_1", test_factorial_1),&
-            test("factorial_2", test_factorial_2),&
-            test("cotan", test_cotan)&
-        ]))&
+        my_suite1(),&
+        my_suite2()&
     ])
 
   end function tests
+
+
+  function my_suite1() result(res)
+    type(test_item) :: res
+
+    res = suite("simple1", test_list([&
+        test("factorial_0", test_factorial_0),&
+        test("factorial_1", test_factorial_1),&
+        test("factorial_2", test_factorial_2)&
+    ]))
+
+  end function my_suite1
+
+
+  function my_suite2() result(res)
+    type(test_item) :: res
+
+    res = suite("simple2", test_list([&
+        test("cotan", test_cotan)&
+    ]))
+
+
+  end function my_suite2
 
 
   ! Test: 0! = 1
